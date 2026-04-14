@@ -714,7 +714,9 @@ footer {
   background: linear-gradient(135deg, rgba(200,137,58,.2), rgba(122,74,30,.15));
 }
 
-.modal-body { padding: 2rem; }
+.modal-body {
+  padding: 2rem;
+}
 
 .modal-cat { font-size: .7rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--caramel); margin-bottom: .5rem; }
 .modal-name { font-family: var(--font-playfair), serif; font-size: 1.6rem; font-weight: 900; color: var(--wheat); margin-bottom: 1rem; }
@@ -776,7 +778,30 @@ footer {
   .process-steps { grid-template-columns: 1fr; }
 
   .modal-overlay { padding: 1rem; }
-  .modal-body { padding: 1.2rem; }
+  .modal-overlay { align-items: flex-end; }
+  .modal {
+    width: 100%;
+    max-width: 560px;
+    max-height: calc(100dvh - 2rem);
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-img {
+    height: 180px;
+    flex: 0 0 auto;
+  }
+  .modal-body {
+    padding: 1.1rem;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    flex: 1 1 auto;
+  }
+  .modal-close {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 400;
+  }
   .modal-footer { flex-direction: column; align-items: stretch; gap: .9rem; }
   .modal-price { text-align: center; }
   .modal-footer .btn-primary { width: 100%; text-align: center; }
