@@ -260,13 +260,10 @@ function LandingPage() {
             <a href="#produtos">Produtos</a>
           </li>
           <li>
-            <a href="#processo">Processo</a>
-          </li>
-          <li>
             <a href="#clientes">Clientes</a>
           </li>
         </ul>
-        <a href="#contato" className="nav-cta">
+        <a href="https://wa.me/82987317923" className="nav-cta">
           Solicitar Orçamento
         </a>
       </nav>
@@ -602,12 +599,6 @@ function LandingPage() {
                 <a href="#sobre">Sobre nós</a>
               </li>
               <li>
-                <a href="#processo">Processo</a>
-              </li>
-              <li>
-                <a href="#">Certificações</a>
-              </li>
-              <li>
                 <a href="#">Política de Qualidade</a>
               </li>
               <li>
@@ -644,7 +635,7 @@ function LandingPage() {
             <h4>Contato</h4>
             <div className="contact-item">
               <a
-                href="https://instagram.com/graomaestro"
+                href="https://www.instagram.com/c2aditivos/"
                 target="_blank"
                 className="contact-icon-link"
                 aria-label="Instagram"
@@ -674,7 +665,7 @@ function LandingPage() {
               </a>
               <div className="contact-text">
                 <strong>Instagram</strong>
-                @graomaestro
+                @c2aditivos
               </div>
             </div>
             <div className="contact-item">
@@ -702,16 +693,16 @@ function LandingPage() {
               </a>
               <div className="contact-text">
                 <strong>Localização</strong>
-                Rua das Indústrias, 1.420
+                Portal dos Gregorios, 2
                 <br />
-                Jd. Industrial — São Paulo, SP
+                Satuba — Alagoas
                 <br />
-                CEP 04852-310
+                CEP 57120-000
               </div>
             </div>
             <div className="contact-item">
               <a
-                href="https://wa.me/5511994562210"
+                href="https://wa.me/82987317923"
                 target="_blank"
                 className="contact-icon-link"
                 aria-label="Conversar no WhatsApp"
@@ -729,7 +720,7 @@ function LandingPage() {
               </a>
               <div className="contact-text">
                 <strong>WhatsApp</strong>
-                (11) 99456-2210
+                (82) 98731-7923
               </div>
             </div>
           </div>
