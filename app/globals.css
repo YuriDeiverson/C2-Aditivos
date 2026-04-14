@@ -733,13 +733,32 @@ footer {
 
 .modal-close {
   position: absolute; top: 1rem; right: 1rem;
-  width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(245,230,200,.15);
-  background: rgba(255,255,255,.06); color: rgba(245,230,200,.6);
+  width: 42px; height: 42px; border-radius: 50%;
+  
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.2);
+
+  color: #fff;
+  font-size: 1.2rem;
+  
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 1rem; z-index: 10;
-  transition: background .2s;
+  cursor: pointer;
+  z-index: 10;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,.4);
+  transition: all .2s ease;
 }
-.modal-close:hover { background: rgba(200,137,58,.2); color: var(--caramel); }
+.modal-close:hover {
+  background: rgba(200,137,58,.9); /* cor da marca mais forte */
+  border-color: rgba(200,137,58,1);
+  transform: scale(1.05);
+}
+.modal-close:active { transform: translateY(0); }
+.modal-close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(200,137,58,.35), 0 10px 30px rgba(0,0,0,.25);
+}
 .modal { position: relative; }
 
 /* ── RESPONSIVE ── */
@@ -764,11 +783,19 @@ footer {
   .nav-logo { font-size: 1.15rem; gap: .5rem; }
   .nav-logo img { height: 32px; }
 
-  .hero { padding: 6.5rem 5vw 3.5rem; }
+  .hero {
+    min-height: auto;
+    padding: 5.2rem 5vw 3rem;
+    align-items: start;
+  }
   h1 { font-size: clamp(2.1rem, 8.5vw, 3rem); }
   .hero-desc { font-size: .98rem; text-align: left; }
   .hero-actions { gap: .75rem; }
   .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: .9rem 1.4rem; }
+
+  .hero-eyebrow { margin-bottom: 1.1rem; }
+  h1 { margin-bottom: 1.05rem; }
+  .hero-desc { margin-bottom: 1.6rem; }
 
   .products-filter { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: .25rem; }
   .products-filter::-webkit-scrollbar { display: none; }
@@ -797,10 +824,9 @@ footer {
     flex: 1 1 auto;
   }
   .modal-close {
-    position: fixed;
-    top: 14px;
-    right: 14px;
-    z-index: 400;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
   .modal-footer { flex-direction: column; align-items: stretch; gap: .9rem; }
   .modal-price { text-align: center; }
