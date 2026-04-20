@@ -1,33 +1,33 @@
-import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { Inter, Outfit } from 'next/font/google'
+import './globals.css'
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-dm-sans",
-});
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  variable: "--font-playfair",
-});
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  weight: ['400', '500', '600', '700', '800', '900'],
+})
 
 export const metadata: Metadata = {
-  title: "C2 Aditivos — Ingredientes para Panificação Industrial",
-  description:
-    "Ingredientes técnicos e aditivos especializados para padarias, confeitarias e indústrias alimentícias.",
-};
+  title: 'SHOP.CO - Encontre Roupas que Combinam com Seu Estilo',
+  description: 'Navegue por nossa coleção diversificada de roupas meticulosamente criadas, projetadas para destacar sua individualidade.',
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="pt-BR" className={`${dmSans.variable} ${playfair.variable}`}>
-      <body>{children}</body>
+    <html lang="pt-BR" className={`${inter.variable} ${outfit.variable} bg-white`}>
+      <body className="font-sans antialiased">
+        {children}
+      </body>
     </html>
-  );
+  )
 }
