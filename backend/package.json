@@ -1,0 +1,12 @@
+{
+  "name": "c2aditivos-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed:admin": "node scripts/seed-dev-admin.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.104.0",
+    "dotenv": "^16.4.7"
+  }
+}
