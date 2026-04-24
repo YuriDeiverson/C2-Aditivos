@@ -45,17 +45,19 @@ export default function BannerSlider() {
           overflow: hidden;
         }
 
-        /* ALTURA CONTROLADA (desktop) */
+        /* DESKTOP */
         .banner-track {
           position: relative;
           width: 100%;
           aspect-ratio: 16 / 7;
         }
 
-        /* MOBILE: altura natural */
+        /* MOBILE PROFISSIONAL */
         @media (max-width: 640px) {
           .banner-track {
-            aspect-ratio: unset;
+            height: 60vh;
+            min-height: 280px;
+            max-height: 520px;
           }
         }
 
@@ -68,10 +70,10 @@ export default function BannerSlider() {
 
         .banner-slide.active {
           opacity: 1;
-          position: relative;
+          z-index: 2;
         }
 
-        /* IMAGEM PROFISSIONAL */
+        /* IMAGEM */
         .banner-img {
           width: 100%;
           height: 100%;
@@ -79,15 +81,7 @@ export default function BannerSlider() {
           display: block;
         }
 
-        /* MOBILE: imagem define altura */
-        @media (max-width: 640px) {
-          .banner-img {
-            height: auto;
-            object-fit: contain;
-          }
-        }
-
-        /* OVERLAY SUAVE (SEM ESCURECER TUDO) */
+        /* OVERLAY LEVE (SEM ESCURECER DEMAIS) */
         .banner-overlay {
           position: absolute;
           inset: 0;
@@ -99,7 +93,6 @@ export default function BannerSlider() {
           pointer-events: none;
         }
 
-        /* MOBILE: overlay mais leve */
         @media (max-width: 640px) {
           .banner-overlay {
             background: linear-gradient(
@@ -113,7 +106,7 @@ export default function BannerSlider() {
         .banner-link {
           position: absolute;
           inset: 0;
-          z-index: 2;
+          z-index: 3;
         }
       `}</style>
 
