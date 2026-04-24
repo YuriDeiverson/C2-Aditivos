@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 const CATS = [
@@ -41,7 +43,7 @@ export default function CategoriesSection() {
         }
 
         .cats-kicker {
-          font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+          font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -50,49 +52,81 @@ export default function CategoriesSection() {
         }
 
         .cats-title {
-          font-size: clamp(1.4rem, 4vw, 2.25rem);
+          font-size: clamp(1.5rem, 4vw, 2.25rem);
           font-weight: 800;
           line-height: 1.1;
           color: #1a1008;
           margin: 0;
         }
 
+        /* ───────── DESKTOP GRID ───────── */
         .cats-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 1rem;
         }
 
-        @media (max-width: 767px) {
+        /* ───────── MOBILE: SCROLL HORIZONTAL ───────── */
+        @media (max-width: 768px) {
           .cats-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.875rem; /* ~14px entre os cards */
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 0.5rem;
+            -webkit-overflow-scrolling: touch;
+          }
+
+          .cats-grid::-webkit-scrollbar {
+            display: none;
           }
         }
 
         .cat-card {
           position: relative;
           display: block;
-          aspect-ratio: 3 / 4;
-          border-radius: 12px;
+          border-radius: 14px;
           overflow: hidden;
           text-decoration: none;
           background: #2c1c12;
-          -webkit-tap-highlight-color: transparent;
           transition: transform 0.2s ease, box-shadow 0.2s ease;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        /* DESKTOP SIZE */
+        .cat-card {
+          aspect-ratio: 3 / 4;
+        }
+
+        /* MOBILE SIZE */
+        @media (max-width: 768px) {
+          .cat-card {
+            min-width: 68%;
+            aspect-ratio: 4 / 5;
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+          }
+        }
+
+        /* EXTRA SMALL (celular pequeno) */
+        @media (max-width: 420px) {
+          .cat-card {
+            min-width: 78%;
+          }
         }
 
         .cat-card:active {
-          transform: scale(0.97);
+          transform: scale(0.96);
         }
 
         @media (hover: hover) {
           .cat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(0,0,0,.22);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 40px rgba(0,0,0,.25);
           }
+
           .cat-card:hover .cat-card-img {
-            transform: scale(1.06);
+            transform: scale(1.08);
           }
         }
 
@@ -108,21 +142,32 @@ export default function CategoriesSection() {
           height: 100%;
           object-fit: cover;
           object-position: center;
-          display: block;
-          transition: transform 0.45s ease;
+          transition: transform 0.5s ease;
           will-change: transform;
         }
 
+        /* OVERLAY MELHORADO */
         .cat-card-overlay {
           position: absolute;
           inset: 0;
           background: linear-gradient(
             to top,
-            rgba(20, 10, 4, 0.75) 0%,
-            rgba(20, 10, 4, 0.25) 50%,
-            transparent 100%
+            rgba(0,0,0,0.75) 0%,
+            rgba(0,0,0,0.3) 50%,
+            rgba(0,0,0,0.05) 100%
           );
-          pointer-events: none;
+        }
+
+        /* MOBILE: overlay mais leve */
+        @media (max-width: 768px) {
+          .cat-card-overlay {
+            background: linear-gradient(
+              to top,
+              rgba(0,0,0,0.65) 0%,
+              rgba(0,0,0,0.2) 50%,
+              transparent 100%
+            );
+          }
         }
 
         .cat-card-content {
@@ -130,28 +175,23 @@ export default function CategoriesSection() {
           inset: 0;
           display: flex;
           align-items: flex-end;
-          padding: clamp(0.75rem, 3vw, 1rem);
-          pointer-events: none;
+          padding: 1rem;
         }
 
         .cat-card-label {
           color: #fff;
-          font-size: clamp(0.85rem, 2.2vw, 1rem);
+          font-size: clamp(0.95rem, 2.8vw, 1.1rem);
           font-weight: 700;
           letter-spacing: 0.03em;
           line-height: 1.2;
-          word-break: break-word;
-          hyphens: auto;
-          text-shadow: 0 1px 8px rgba(0,0,0,.6);
+          text-shadow: 0 2px 12px rgba(0,0,0,.7);
         }
       `}</style>
 
-      <section className="cats-section" aria-labelledby="cats-heading">
+      <section className="cats-section">
         <div className="cats-header">
           <p className="cats-kicker">Explore por</p>
-          <h2 id="cats-heading" className="cats-title">
-            Categoria
-          </h2>
+          <h2 className="cats-title">Categoria</h2>
         </div>
 
         <div className="cats-grid">
@@ -162,7 +202,6 @@ export default function CategoriesSection() {
                 alt={cat.label}
                 className="cat-card-img"
                 loading="lazy"
-                decoding="async"
               />
               <div className="cat-card-overlay" />
               <div className="cat-card-content">
