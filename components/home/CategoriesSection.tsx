@@ -33,7 +33,7 @@ export default function CategoriesSection() {
       <style>{`
         .cats-section {
           width: 100%;
-          padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 3rem);
+          padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3rem);
         }
 
         .cats-header {
@@ -60,13 +60,13 @@ export default function CategoriesSection() {
         .cats-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: clamp(0.5rem, 1.5vw, 1rem);
+          gap: 1rem;
         }
 
         @media (max-width: 767px) {
           .cats-grid {
             grid-template-columns: repeat(2, 1fr);
-            gap: 0.625rem;
+            gap: 0.875rem; /* ~14px entre os cards */
           }
         }
 
@@ -74,7 +74,7 @@ export default function CategoriesSection() {
           position: relative;
           display: block;
           aspect-ratio: 3 / 4;
-          border-radius: clamp(6px, 1.5vw, 12px);
+          border-radius: 12px;
           overflow: hidden;
           text-decoration: none;
           background: #2c1c12;
@@ -130,13 +130,13 @@ export default function CategoriesSection() {
           inset: 0;
           display: flex;
           align-items: flex-end;
-          padding: clamp(0.6rem, 2.5vw, 1rem);
+          padding: clamp(0.75rem, 3vw, 1rem);
           pointer-events: none;
         }
 
         .cat-card-label {
           color: #fff;
-          font-size: clamp(0.82rem, 2.2vw, 1rem);
+          font-size: clamp(0.85rem, 2.2vw, 1rem);
           font-weight: 700;
           letter-spacing: 0.03em;
           line-height: 1.2;
