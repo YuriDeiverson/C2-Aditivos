@@ -4,25 +4,25 @@ const CATS = [
   {
     key: "melhores",
     label: "Melhores",
-    img: "/melhorador-massa.jpg",
+    img: "/Melhorador em pó.jpeg",
     href: "/produtos?sort=popular",
   },
   {
     key: "base",
     label: "Bases prontas",
-    img: "/base-multigraos.jpg",
+    img: "/Amido de milho.jpeg",
     href: "/produtos?cat=base",
   },
   {
     key: "enzima",
     label: "Enzimas",
-    img: "/enzima-amilamix.jpg",
+    img: "/Chocolate em pó.jpeg",
     href: "/produtos?cat=enzima",
   },
   {
     key: "fermentacao",
     label: "Fermentação",
-    img: "/fermento-seco.jpg",
+    img: "/Fermento quimico em pó.jpeg",
     href: "/produtos?cat=fermentacao",
   },
 ];
@@ -70,7 +70,6 @@ export default function CategoriesSection() {
           }
         }
 
-        /* Card usa <img> real — evita problemas de background-image em mobile */
         .cat-card {
           position: relative;
           display: block;
