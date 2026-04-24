@@ -116,12 +116,16 @@ export default function BannerSlider() {
         }
 
         /* 🔥 OVERLAY CORRIGIDO */
-        .banner-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,.2), transparent);
-        }
-
+        @media (max-width: 640px) {
+  .banner-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.05),
+      transparent
+    );
+  }
+}
         .banner-hero-hit {
           position: absolute;
           inset: 0;
