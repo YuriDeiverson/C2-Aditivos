@@ -1,29 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
-type SlideBase = {
+type Slide = {
   id: number;
   imageSrc: string;
-  bgColor: string;
-  accentColor: string;
   href: string;
-};
-
-type SlideImageHero = SlideBase & {
-  imageOnly: true;
   ariaLabel: string;
 };
-
-type Slide = SlideImageHero;
 
 const SLIDES: Slide[] = [
   {
     id: 1,
-    imageOnly: true,
     imageSrc: "/Bannerprincipal.png",
-    bgColor: "#2c1c12",
-    accentColor: "#C8893A",
     href: "/produtos",
     ariaLabel: "Banner principal",
   },
@@ -32,15 +21,13 @@ const SLIDES: Slide[] = [
 export default function BannerSlider() {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const total = SLIDES.length;
 
   const startTimer = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(
-      () => setCurrent((c) => (c + 1) % total),
-      5500
-    );
-  }, [total]);
+    timerRef.current = setInterval(() => {
+      setCurrent((c) => (c + 1) % SLIDES.length);
+    }, 5500);
+  }, []);
 
   useEffect(() => {
     startTimer();
@@ -53,17 +40,22 @@ export default function BannerSlider() {
     <>
       <style>{`
         .banner-slider {
-          position: relative;
           width: 100%;
+          position: relative;
           overflow: hidden;
-          aspect-ratio: 16 / 7;
-          background: #1a1008;
         }
 
+        /* ALTURA CONTROLADA (desktop) */
+        .banner-track {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 7;
+        }
+
+        /* MOBILE: altura natural */
         @media (max-width: 640px) {
-          .banner-slider {
+          .banner-track {
             aspect-ratio: unset;
-            height: auto;
           }
         }
 
@@ -71,62 +63,54 @@ export default function BannerSlider() {
           position: absolute;
           inset: 0;
           opacity: 0;
-          transition: opacity .5s ease;
+          transition: opacity .6s ease;
         }
 
         .banner-slide.active {
           opacity: 1;
+          position: relative;
         }
 
-        /* 🔥 MOBILE FIX REAL */
+        /* IMAGEM PROFISSIONAL */
+        .banner-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        /* MOBILE: imagem define altura */
         @media (max-width: 640px) {
-          .banner-slide {
-            position: absolute;
-          }
-
-          .banner-slide.active {
-            position: relative;
+          .banner-img {
             height: auto;
+            object-fit: contain;
           }
         }
 
-        .banner-img--hero {
+        /* OVERLAY SUAVE (SEM ESCURECER TUDO) */
+        .banner-overlay {
           position: absolute;
           inset: 0;
-          background-size: cover;
-          background-position: center;
+          background: linear-gradient(
+            to top,
+            rgba(0,0,0,0.25),
+            transparent
+          );
+          pointer-events: none;
         }
 
-        /* 🔥 MOBILE IMG REAL */
+        /* MOBILE: overlay mais leve */
         @media (max-width: 640px) {
-          .banner-img--hero {
-            position: relative;
-            background: none !important;
-          }
-
-          .banner-hero-img-real {
-            display: block;
-            width: 100%;
-            height: auto;
+          .banner-overlay {
+            background: linear-gradient(
+              to top,
+              rgba(0,0,0,0.1),
+              transparent
+            );
           }
         }
 
-        .banner-hero-img-real {
-          display: none;
-        }
-
-        /* 🔥 OVERLAY CORRIGIDO */
-        @media (max-width: 640px) {
-  .banner-overlay {
-    background: linear-gradient(
-      to top,
-      rgba(0,0,0,0.15),
-      rgba(0,0,0,0.05),
-      transparent
-    );
-  }
-}
-        .banner-hero-hit {
+        .banner-link {
           position: absolute;
           inset: 0;
           z-index: 2;
@@ -134,28 +118,24 @@ export default function BannerSlider() {
       `}</style>
 
       <div className="banner-slider">
-        {SLIDES.map((slide, i) => (
-          <div
-            key={slide.id}
-            className={`banner-slide ${i === current ? "active" : ""}`}
-            style={{ background: slide.bgColor }}
-          >
+        <div className="banner-track">
+          {SLIDES.map((slide, i) => (
             <div
-              className="banner-img--hero"
-              style={{ backgroundImage: `url(${slide.imageSrc})` }}
+              key={slide.id}
+              className={`banner-slide ${i === current ? "active" : ""}`}
             >
               <img
                 src={slide.imageSrc}
                 alt={slide.ariaLabel}
-                className="banner-hero-img-real"
+                className="banner-img"
               />
+
+              <div className="banner-overlay" />
+
+              <a href={slide.href} className="banner-link" />
             </div>
-
-            <div className="banner-overlay" />
-
-            <a href={slide.href} className="banner-hero-hit" />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );
