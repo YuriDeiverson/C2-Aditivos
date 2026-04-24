@@ -88,6 +88,7 @@ export default function BannerSlider() {
   return (
     <>
       <style>{`
+        /* ── Desktop: aspect-ratio fixo ── */
         .banner-slider {
           position: relative;
           width: 100%;
@@ -99,13 +100,18 @@ export default function BannerSlider() {
           touch-action: pan-y pinch-zoom;
           -webkit-tap-highlight-color: transparent;
         }
+
+        /* ── Mobile: altura automática — imagem dita a altura ── */
         @media (max-width: 640px) {
-          .banner-slider { aspect-ratio: 4 / 3; max-height: 420px; }
-        }
-        @media (max-width: 400px) {
-          .banner-slider { aspect-ratio: 1 / 1; max-height: 360px; }
+          .banner-slider {
+            aspect-ratio: unset;
+            max-height: unset;
+            min-height: unset;
+            height: auto;
+          }
         }
 
+        /* ── Slides ── */
         .banner-slide {
           position: absolute;
           inset: 0;
@@ -114,8 +120,25 @@ export default function BannerSlider() {
           transition: opacity 0.65s ease;
           will-change: opacity;
         }
-        .banner-slide.active { opacity: 1; pointer-events: auto; }
+        .banner-slide.active {
+          opacity: 1;
+          pointer-events: auto;
+        }
 
+        /* No mobile o slide ativo precisa ser relativo para empurrar a altura */
+        @media (max-width: 640px) {
+          .banner-slide {
+            position: absolute;
+            inset: 0;
+          }
+          /* O slide ativo vira relativo para definir a altura do container */
+          .banner-slide.active {
+            position: relative;
+            inset: unset;
+          }
+        }
+
+        /* ── Hero image — desktop: cobre todo o container ── */
         .banner-img--hero {
           position: absolute;
           inset: 0;
@@ -123,14 +146,44 @@ export default function BannerSlider() {
           background-position: center center;
           background-repeat: no-repeat;
         }
-        @media (max-width: 480px) {
-          .banner-img--hero { background-position: center top; }
+
+        /* ── Hero image — mobile: usa <img> real para altura natural ── */
+        @media (max-width: 640px) {
+          .banner-img--hero {
+            position: relative;
+            inset: unset;
+            width: 100%;
+            height: auto;
+            background: none !important; /* desativa background-image */
+          }
+          /* A imagem real fica visível */
+          .banner-img--hero .banner-hero-img-real {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+          }
+        }
+
+        /* Esconde a img real no desktop (usa background-image) */
+        .banner-hero-img-real {
+          display: none;
         }
 
         .banner-overlay--hero {
           position: absolute;
           inset: 0;
           background: linear-gradient(to top, rgba(0,0,0,.22) 0%, transparent 40%);
+          pointer-events: none;
+        }
+
+        @media (max-width: 640px) {
+          .banner-overlay--hero {
+            /* Overlay leve por cima da img real */
+            inset: unset;
+            top: 0; left: 0; right: 0; bottom: 0;
+            position: absolute;
+          }
         }
 
         .banner-hero-hit {
@@ -140,6 +193,7 @@ export default function BannerSlider() {
           display: block;
         }
 
+        /* ── Rich slides ── */
         .banner-img {
           position: absolute;
           inset: 0;
@@ -240,6 +294,7 @@ export default function BannerSlider() {
           min-height: 160px;
         }
 
+        /* ── Setas (ocultas no mobile) ── */
         .slider-arrow {
           position: absolute;
           top: 50%;
@@ -259,7 +314,7 @@ export default function BannerSlider() {
           transition: background .2s ease, transform .15s ease;
           -webkit-tap-highlight-color: transparent;
         }
-        @media (max-width: 480px) { .slider-arrow { display: none; } }
+        @media (max-width: 640px) { .slider-arrow { display: none; } }
         .slider-prev { left: clamp(0.5rem, 2vw, 1.25rem); }
         .slider-next { right: clamp(0.5rem, 2vw, 1.25rem); }
         @media (hover: hover) {
@@ -267,6 +322,7 @@ export default function BannerSlider() {
         }
         .slider-arrow:active { transform: translateY(-50%) scale(0.95); }
 
+        /* ── Dots ── */
         .slider-dots {
           position: absolute;
           bottom: clamp(0.5rem, 2vw, 1rem);
@@ -337,9 +393,25 @@ export default function BannerSlider() {
             >
               {isHeroImage ? (
                 <>
-                  <div className="banner-img banner-img--hero" style={{ backgroundImage: `url(${slide.imageSrc})` }} />
+                  {/* Desktop: background-image. Mobile: <img> real com altura natural */}
+                  <div
+                    className="banner-img banner-img--hero"
+                    style={{ backgroundImage: `url(${slide.imageSrc})` }}
+                  >
+                    {/* Visível apenas no mobile via CSS */}
+                    <img
+                      src={slide.imageSrc}
+                      alt={slide.ariaLabel}
+                      className="banner-hero-img-real"
+                      draggable={false}
+                    />
+                  </div>
                   <div className="banner-overlay banner-overlay--hero" />
-                  <a href={slide.href} className="banner-hero-hit" tabIndex={i === current ? 0 : -1}>
+                  <a
+                    href={slide.href}
+                    className="banner-hero-hit"
+                    tabIndex={i === current ? 0 : -1}
+                  >
                     <span className="sr-only">{slide.ariaLabel}</span>
                   </a>
                 </>
