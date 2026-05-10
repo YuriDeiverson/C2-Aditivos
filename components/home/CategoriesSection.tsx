@@ -17,7 +17,7 @@ const CATS = [
     label: "Mais Vendidos",
     title: "Melhores Produtos",
     description: "Nossa seleção dos produtos mais populares e bem avaliados pelos clientes.",
-    img: "/melhorador-massa.jpg",
+    img: "/Melhorador em pó.jpeg",
     href: "/produtos?sort=popular",
     featured: true,
     cta: "Ver todos",
@@ -27,7 +27,7 @@ const CATS = [
     label: "Bases",
     title: "Bases Prontas",
     description: "Soluções completas para panificação com máxima performance.",
-    img: "/base-multigraos.jpg",
+    img: "/Amido de milho.jpeg",
     href: "/produtos?cat=base",
   },
   {
@@ -35,7 +35,7 @@ const CATS = [
     label: "Enzimas",
     title: "Enzimas",
     description: "Tecnologia enzimática para melhorar textura e shelf life.",
-    img: "/enzima-amilamix.jpg",
+    img: "/Chocolate em pó.jpeg",
     href: "/produtos?cat=enzima",
   },
   {
@@ -43,7 +43,7 @@ const CATS = [
     label: "Fermentação",
     title: "Fermentação",
     description: "Fermentos e melhoradores biológicos de alta qualidade.",
-    img: "/fermento-seco.jpg",
+    img: "/Fermento quimico em pó.jpeg",
     href: "/produtos?cat=fermentacao",
   },
   {
@@ -51,7 +51,7 @@ const CATS = [
     label: "Melhoradores",
     title: "Melhoradores",
     description: "Aditivos para otimizar processos e resultados.",
-    img: "/melhorador-massa.jpg",
+    img: "/Melhorador em pó.jpeg",
     href: "/produtos?cat=melhoradores",
   },
   {
@@ -59,7 +59,7 @@ const CATS = [
     label: "Emulsificantes",
     title: "Emulsificantes",
     description: "Estabilizantes para cremes, recheios e massas.",
-    img: "/base-multigraos.jpg",
+    img: "/Amido de milho.jpeg",
     href: "/produtos?cat=emulsificantes",
   },
 ];
@@ -171,7 +171,6 @@ export default function CategoriesSection() {
           ))}
         </div>
       </div>
-
       {/* Mobile - Swipeable Slider */}
       <div
         ref={sliderRef}
