@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import VendorSelectModal, { Vendor, buildVendorWhatsAppHref } from "@/components/cart/VendorSelectModal";
 import { useCart } from "@/context/CartContext";
-import { buildWhatsAppHref } from "../../lib/whatsapp";
 
 export const dynamic = "force-dynamic";
 
@@ -19,11 +20,14 @@ export default function CarrinhoPage() {
     clearCart,
   } = useCart();
 
-  const waHref = buildWhatsAppHref(
-    `Olá! Gostaria de solicitar um orçamento.\n\nItens:\n${items
-      .map(({ product, quantity }) => `- ${quantity}x ${product.name}`)
-      .join("\n")}`
-  );
+  const [isVendorModalOpen, setIsVendorModalOpen] = useState(false);
+
+  const handleSelectVendor = (vendor: Vendor) => {
+    const waHref = buildVendorWhatsAppHref(vendor.phone, items);
+    window.open(waHref, "_blank", "noopener,noreferrer");
+    clearCart();
+    router.push("/carrinho/sucesso?orcamento=1");
+  };
 
   if (items.length === 0) {
     return (
@@ -97,15 +101,11 @@ export default function CarrinhoPage() {
             <button
               type="button"
               className="cart-checkout-btn"
-              onClick={() => {
-                window.open(waHref, "_blank", "noopener,noreferrer");
-                clearCart();
-                router.push("/carrinho/sucesso?orcamento=1");
-              }}
+              onClick={() => setIsVendorModalOpen(true)}
             >
               Solicitar orçamento
             </button>
-            <p className="cart-checkout-hint">Você envia a lista de itens no WhatsApp e retornamos com o orçamento.</p>
+            <p className="cart-checkout-hint">Escolha seu vendedor e envie seu pedido pelo WhatsApp.</p>
 
             <Link href="/produtos" className="cart-continue-link">
               ← Continuar Comprando
@@ -113,6 +113,13 @@ export default function CarrinhoPage() {
           </div>
         </div>
       </div>
+
+      <VendorSelectModal
+        isOpen={isVendorModalOpen}
+        onClose={() => setIsVendorModalOpen(false)}
+        items={items}
+        onSelectVendor={handleSelectVendor}
+      />
 
       <Footer />
     </>

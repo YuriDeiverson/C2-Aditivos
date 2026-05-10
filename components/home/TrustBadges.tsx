@@ -21,7 +21,7 @@ export default function TrustBadges({ freteSubtitle }: Props) {
 
       <div className="trust-sep" aria-hidden="true" />
 
-      <div className="trust-badge">
+      <div className="trust-badge mobile-hide">
         <svg className="trust-icon" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
         </svg>
@@ -31,9 +31,9 @@ export default function TrustBadges({ freteSubtitle }: Props) {
         </div>
       </div>
 
-      <div className="trust-sep" aria-hidden="true" />
+      <div className="trust-sep mobile-hide" aria-hidden="true" />
 
-      <div className="trust-badge">
+      <div className="trust-badge mobile-hide">
         <svg className="trust-icon" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <rect x="1" y="4" width="22" height="16" rx="2" />
           <line x1="1" y1="10" x2="23" y2="10" />
@@ -44,9 +44,9 @@ export default function TrustBadges({ freteSubtitle }: Props) {
         </div>
       </div>
 
-      <div className="trust-sep" aria-hidden="true" />
+      <div className="trust-sep mobile-hide" aria-hidden="true" />
 
-      <div className="trust-badge">
+      <div className="trust-badge mobile-hide">
         <svg className="trust-icon" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         </svg>
